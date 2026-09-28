@@ -19,7 +19,7 @@ from app.discovery import anomaly, changepoint, clustering, sequence
 from app.discovery.validation import SIGNIFICANCE_ALPHA, benjamini_hochberg
 from app.evidence.evidence_engine import build_evidence
 from app.features.state_engine import build_football_states
-from app.models import DiscoveredState, Discovery, Play
+from app.models import DiscoveredState, Discovery, Evidence, Play
 
 LIMITATIONS_COMMON = (
     "Associational, not causal: reflects historical co-occurrence within the ingested plays, "
@@ -139,6 +139,14 @@ def run_discovery(db: Session) -> list[Discovery]:
     dataset_version = _dataset_version_label(states)
 
     findings = _gather_findings(states)
+
+    # A discovery run replaces the previous run's output rather than accumulating
+    # duplicates each time "Find something I didn't ask" is clicked against unchanged data.
+    db.query(Evidence).filter(Evidence.discovery_id.is_not(None)).delete(synchronize_session=False)
+    db.query(Discovery).delete(synchronize_session=False)
+    db.query(DiscoveredState).delete(synchronize_session=False)
+    db.commit()
+
     if not findings:
         return []
 

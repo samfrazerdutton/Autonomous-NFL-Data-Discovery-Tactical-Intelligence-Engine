@@ -1,0 +1,36 @@
+/*
+  GRIDSTATE design tokens.
+
+  Direction: a night broadcast-truck / coach's film-room terminal, not a SaaS
+  dashboard. The grid motif (GRIDSTATE) is structural -- thin hairlines at
+  regular intervals stand in for yard lines -- not decorative. Discovery types
+  are told apart by a functional color code (like broadcast stat-graphic
+  categories), not one single decorative accent.
+*/
+:root {
+  /* Ground */
+  --bg: #0a0d10;
+  --surface: #10151a;
+  --surface-raised: #151b21;
+  --line: #232c34;
+  --line-strong: #333f4a;
+
+  /* Text */
+  --text: #e7ecef;
+  --text-muted: #8a97a0;
+  --text-faint: #576169;
+
+  /* Functional accents */
+  --gold: #c9a227;
+  --gold-dim: #8a7222;
+  --blue: #4f8fc4;
+  --red: #c1512f;
+  --green: #5c9271;
+
+  /* Type */
+  --font-display: "Big Shoulders Display", sans-serif;
+  --font-body: "IBM Plex Sans", -apple-system, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+
+  --radius: 3px;
+}
